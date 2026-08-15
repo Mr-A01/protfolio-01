@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Mr.A — Creative Developer · Singularity</title>
+<meta name="description" content="A cinematic ten-chapter journey around a living violet singularity. One continuous scene — scroll controls the camera, the light and the story.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://Mr.A.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" id="ogTitle" content="Mr.A — Singularity">
+<meta property="og:description" id="ogDesc" content="Ten chapters around a living black hole. One continuous cinematic WebGL scene.">
+<meta property="og:url" content="https://Mr.A.dev/">
+<meta property="og:image" content="https://image.qwenlm.ai/public_source/592f8261-52d5-4c70-a830-77a176a318f2/19bc32744-3009-4e1f-8f91-656ec36c1e87.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Mr.A","jobTitle":"Creative Developer & WebGL Engineer","url":"https://Mr.A.dev/","email":"mailto:hello@Mr.A.dev","knowsAbout":["Three.js","WebGL","GLSL","GSAP","Creative Frontend","Motion Design"]}
+</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="image" href="https://image.qwenlm.ai/public_source/592f8261-52d5-4c70-a830-77a176a318f2/19bc32744-3009-4e1f-8f91-656ec36c1e87.png" fetchpriority="high">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-grotesk@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-grotesk@latest/latin-500-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-grotesk@latest/latin-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/latin-300-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/latin-500-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/newsreader@latest/latin-400-italic.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/arabic-300-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/arabic-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/arabic-500-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/arabic-700-normal.css">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="progress" aria-hidden="true"></div>
+
+<div id="loader" role="status" aria-label="Loading">
+  <div class="hole" aria-hidden="true"></div>
+  <div class="pct" id="loadPct">000</div>
+  <div class="bar"><i id="loadBar"></i></div>
+  <div class="status" data-i18n="loader.status">Entering the singularity</div>
+</div>
+
+<header id="nav">
+  <a class="brand" href="#hero" data-nav><i aria-hidden="true"></i><span>Mr.A</span></a>
+  <nav class="links" aria-label="Primary">
+    <a href="#about" data-nav data-i18n="nav.about">About</a>
+    <a href="#skills" data-nav data-i18n="nav.skills">Skills</a>
+    <a href="#work" data-nav data-i18n="nav.work">Work</a>
+    <a href="#journey" data-nav data-i18n="nav.journey">Journey</a>
+    <a href="#contact" data-nav data-i18n="nav.contact">Contact</a>
+  </nav>
+  <div class="side">
+    <div class="langsw" role="group" aria-label="Language">
+      <button id="langEn" aria-pressed="true">EN</button><span class="sep">/</span><button id="langFa" aria-pressed="false">فا</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </div>
+</header>
+<div id="menu" aria-hidden="true">
+  <a href="#about" data-nav><span>01</span><span data-i18n="ch.about">About</span></a>
+  <a href="#skills" data-nav><span>03</span><span data-i18n="ch.skills">Skills</span></a>
+  <a href="#work" data-nav><span>04</span><span data-i18n="ch.work">Work</span></a>
+  <a href="#journey" data-nav><span>05</span><span data-i18n="ch.journey">Journey</span></a>
+  <a href="#recognition" data-nav><span>07</span><span data-i18n="ch.recognition">Recognition</span></a>
+  <a href="#contact" data-nav><span>09</span><span data-i18n="ch.contact">Contact</span></a>
+</div>
+
+<nav class="rail" aria-label="Chapters">
+  <button data-target="#hero" aria-label="Prologue"><i></i><span data-i18n="ch.hero">Prologue</span></button>
+  <button data-target="#about" aria-label="About"><i></i><span data-i18n="ch.about">About</span></button>
+  <button data-target="#manifesto" aria-label="Manifesto"><i></i><span data-i18n="ch.manifesto">Manifesto</span></button>
+  <button data-target="#skills" aria-label="Skills"><i></i><span data-i18n="ch.skills">Skills</span></button>
+  <button data-target="#work" aria-label="Work"><i></i><span data-i18n="ch.work">Work</span></button>
+  <button data-target="#journey" aria-label="Journey"><i></i><span data-i18n="ch.journey">Journey</span></button>
+  <button data-target="#process" aria-label="Method"><i></i><span data-i18n="ch.process">Method</span></button>
+  <button data-target="#recognition" aria-label="Recognition"><i></i><span data-i18n="ch.recognition">Recognition</span></button>
+  <button data-target="#signals" aria-label="Signals"><i></i><span data-i18n="ch.signals">Signals</span></button>
+  <button data-target="#contact" aria-label="Epilogue"><i></i><span data-i18n="ch.contact">Epilogue</span></button>
+</nav>
+
+<div id="hud" aria-hidden="true"><b id="hudNum">00</b><span class="tick"></span><span id="hudName">Prologue</span><em id="hudMood">mystery</em><span id="hudPct">0%</span></div>
+
+<main id="main">
+  <section id="hero" aria-label="Prologue">
+    <div class="hero-inner">
+      <p class="kicker" data-scramble data-i18n="hero.kicker">Chapter 00 — Prologue</p>
+      <h1>
+        <span class="line"><span data-i18n="hero.l1">Mr.A</span></span>
+        <span class="line"><span data-i18n="hero.l2"></span></span>
+      </h1>
+      <p class="sub" data-i18n="hero.sub">You are not scrolling a website. You are travelling through pure dark space around a living singularity — ten chapters, one continuous scene. Scroll to begin.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid magnetic" href="#work" data-nav><span data-i18n="hero.cta1">View selected work</span><span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost magnetic" href="#contact" data-nav><span data-i18n="hero.cta2">Start a conversation</span></a>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span data-i18n="hero.scroll">Scroll</span><i></i></div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i1">Silence ends. Gravity takes hold — you begin to fall.</p><span class="il-line"></span></div>
+
+  <section id="about" aria-labelledby="about-title">
+    <div class="ghost" aria-hidden="true">01</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="about.label">Chapter 01 — About</span></p>
+      <div class="grid">
+        <div class="txt about-inner">
+          <h2 id="about-title" data-reveal data-i18n="about.title">Flying beside the event horizon.</h2>
+          <p data-reveal data-i18n="about.p1">For over seven years I have built premium, immersive web experiences for forward-thinking brands — places where design, motion and engineering converge into one seamless gravitational field.</p>
+          <p data-reveal data-i18n="about.p2">My belief is simple: every frame matters, every millisecond matters. Detail is what turns a website into a product, and a product into a memory. This portfolio is one continuous scene — one camera, one black hole, one journey.</p>
+          <div class="stats" data-reveal>
+            <div><b>07+</b><span data-i18n="about.s1">Years of craft</span></div>
+            <div><b>46+</b><span data-i18n="about.s2">Projects shipped</span></div>
+            <div><b>12</b><span data-i18n="about.s3">Awards & honors</span></div>
+            <div><b>09</b><span data-i18n="about.s4">Countries served</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i2">The field strengthens. Principles condense out of the dark.</p><span class="il-line"></span></div>
+
+  <section id="manifesto" aria-label="Manifesto">
+    <div class="mani-pin">
+      <p class="label"><span data-i18n="manifesto.label">Chapter 02 — Manifesto</span></p>
+      <div class="mani-lines">
+        <p class="ml" data-i18n-html="m1">A website should feel <em>inevitable.</em></p>
+        <p class="ml" data-i18n-html="m2">Motion is <em>meaning</em> — never decoration.</p>
+        <p class="ml" data-i18n-html="m3">Performance is a form of <em>respect.</em></p>
+        <p class="ml" data-i18n-html="m4">Detail is the <em>loudest</em> signal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-title">
+    <div class="ghost" aria-hidden="true">03</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="skills.label">Chapter 03 — Skills</span></p>
+      <h2 id="skills-title" data-reveal data-i18n="skills.title">Born from the gravitational field.</h2>
+      <p class="hint" data-reveal data-i18n="skills.hint">Everything below orbits the same core: real-time graphics, motion and meticulous engineering.</p>
+      <div class="orbit-cloud" data-reveal>
+        <span class="chip"><i aria-hidden="true"></i>Three.js</span>
+        <span class="chip"><i aria-hidden="true"></i>GLSL Shaders</span>
+        <span class="chip"><i aria-hidden="true"></i>GSAP & Motion</span>
+        <span class="chip"><i aria-hidden="true"></i>WebGL Performance</span>
+        <span class="chip"><i aria-hidden="true"></i>Creative Direction</span>
+        <span class="chip"><i aria-hidden="true"></i>UI Engineering</span>
+        <span class="chip"><i aria-hidden="true"></i>Design Systems</span>
+        <span class="chip"><i aria-hidden="true"></i>Accessibility</span>
+      </div>
+      <div class="meters">
+        <div class="meter"><div class="m-head"><span data-i18n="skills.t1">Real-time 3D & Shaders</span><b>96%</b></div><div class="track"><i style="--val:96%"></i></div></div>
+        <div class="meter"><div class="m-head"><span data-i18n="skills.t2">Motion & Interaction</span><b>93%</b></div><div class="track"><i style="--val:93%"></i></div></div>
+        <div class="meter"><div class="m-head"><span data-i18n="skills.t3">Frontend Architecture</span><b>90%</b></div><div class="track"><i style="--val:90%"></i></div></div>
+        <div class="meter"><div class="m-head"><span data-i18n="skills.t4">Creative Direction</span><b>85%</b></div><div class="track"><i style="--val:85%"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i3">You drift closer. The horizon brightens with work.</p><span class="il-line"></span></div>
+
+  <section id="work" aria-labelledby="work-title">
+    <div class="ghost" aria-hidden="true">04</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="work.label">Chapter 04 — Selected Work</span></p>
+      <h2 id="work-title" data-reveal data-i18n="work.title">Emerged from the portal.</h2>
+      <p class="hint" data-reveal data-i18n="work.hint">Hover — feel the gravity. Click — open the case without leaving the scene.</p>
+      <div id="grid"></div>
+    </div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i4">Every orbit leaves a trace.</p><span class="il-line"></span></div>
+
+  <section id="journey" aria-labelledby="journey-title">
+    <div class="ghost" aria-hidden="true">05</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="journey.label">Chapter 05 — Experience</span></p>
+      <h2 id="journey-title" data-reveal data-i18n="journey.title">One orbit, completed.</h2>
+      <div class="timeline">
+        <span class="tl-fill" aria-hidden="true"></span>
+        <div id="tItems"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" aria-labelledby="process-title">
+    <div class="ghost" aria-hidden="true">06</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="process.label">Chapter 06 — Method</span></p>
+      <h2 id="process-title" data-reveal data-i18n="process.title">A method, not a mystery.</h2>
+      <div class="p-rows" id="pRows"></div>
+    </div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i5">The work speaks. Honors follow.</p><span class="il-line"></span></div>
+
+  <section id="recognition" aria-labelledby="recognition-title">
+    <div class="ghost" aria-hidden="true">07</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="recognition.label">Chapter 07 — Recognition</span></p>
+      <h2 id="recognition-title" data-reveal data-i18n="recognition.title">Signal confirmed by the industry.</h2>
+      <div class="awards" id="awardsList"></div>
+    </div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i6">Signals arrive from distant collaborators.</p><span class="il-line"></span></div>
+
+  <section id="signals" aria-labelledby="signals-title">
+    <div class="ghost" aria-hidden="true">08</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="signals.label">Chapter 08 — Signals</span></p>
+      <h2 id="signals-title" data-reveal data-i18n="signals.title">Transmissions received.</h2>
+      <div class="quotes" id="quotesGrid"></div>
+    </div>
+  </section>
+
+  <div class="interlude" aria-hidden="true"><span class="il-line"></span><p data-i18n="i7">The field grows calm. The journey slows to a whisper.</p><span class="il-line"></span></div>
+
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="ghost" aria-hidden="true">09</div>
+    <div class="wrap">
+      <p class="label"><span data-scramble data-i18n="contact.label">Chapter 09 — Epilogue</span></p>
+      <div class="grid">
+        <div>
+          <h2 id="contact-title" data-reveal data-i18n="contact.title">The journey ends in quiet gravity.</h2>
+          <p class="sub" data-reveal data-i18n="contact.sub">The field is calm now. If something here resonated, let’s build something extraordinary together.</p>
+          <div data-reveal>
+            <a class="mail-link" href="mailto:hello@Mr.A.dev">hello@Mr.A.dev</a>
+            <div class="socials">
+              <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+              <a href="https://x.com" target="_blank" rel="noopener">X / Twitter</a>
+            </div>
+          </div>
+        </div>
+        <form id="cform" data-reveal novalidate>
+          <div class="field"><label for="fname" data-i18n="form.name">Name</label><input id="fname" name="name" type="text" autocomplete="name" data-i18n-ph="form.namePh" placeholder="Your name" required></div>
+          <div class="field"><label for="femail" data-i18n="form.email">Email</label><input id="femail" name="email" type="email" autocomplete="email" placeholder="you@studio.com" required></div>
+          <div class="field"><label for="fmsg" data-i18n="form.msg">Message</label><textarea id="fmsg" name="message" rows="5" data-i18n-ph="form.msgPh" placeholder="Tell me about your project…" required></textarea></div>
+          <button class="btn btn-solid magnetic" type="submit"><span data-i18n="form.send">Send transmission</span><span class="arr" aria-hidden="true">→</span></button>
+          <p class="note" id="formNote" data-i18n="form.note">Replies within 48 hours</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Mr.A — <span data-i18n="footer.rights">All rights reserved.</span></span>
+  <span class="end" data-i18n="footer.end">end of transmission</span>
+  <button id="toTop" class="magnetic" data-i18n="footer.top">Back to top</button>
+</footer>
+
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="backdrop" data-close></div>
+  <div class="panel">
+    <div class="m-top"><button class="close" data-close aria-label="Close">✕</button></div>
+    <div class="m-media"><img id="mImg" alt="" loading="lazy"></div>
+    <h3 id="mTitle"></h3>
+    <div class="m-meta">
+      <div><b data-i18n="modal.year">Year</b><span id="mYear"></span></div>
+      <div><b data-i18n="modal.role">Role</b><span id="mRole"></span></div>
+      <div><b data-i18n="modal.stack">Stack</b><span id="mStack"></span></div>
+    </div>
+    <p class="m-desc" id="mDesc"></p>
+    <a class="btn btn-ghost" id="mVisit" href="#" target="_blank" rel="noopener"><span data-i18n="modal.visit">Visit live site</span><span class="arr" aria-hidden="true">↗</span></a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
